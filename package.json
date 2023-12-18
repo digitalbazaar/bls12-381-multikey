@@ -1,11 +1,11 @@
 {
-  "name": "@digitalbazaar/ecdsa-multikey",
-  "version": "1.6.1-0",
-  "description": "Javascript library for generating and working with EcdsaMultikey key pairs.",
-  "homepage": "https://github.com/digitalbazaar/ecdsa-multikey",
+  "name": "@digitalbazaar/bls12-381-multikey",
+  "version": "0.0.1-0",
+  "description": "Javascript library for generating and working with BLS12-381 (BBS) key pairs.",
+  "homepage": "https://github.com/digitalbazaar/bls12-381-multikey",
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalbazaar/ecdsa-multikey"
+    "url": "https://github.com/digitalbazaar/bls12-381-multikey"
   },
   "license": "BSD-3-Clause",
   "type": "module",
