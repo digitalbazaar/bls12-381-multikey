@@ -96,6 +96,14 @@ BLS12381_SHAKE256.fixtures = [{
   },
   output: BLS12381_SHAKE256.message_scalars
 }, {
+  name: 'Random Scalars',
+  operation: 'mocked_calculate_random_scalars',
+  parameters: {
+    count: BLS12381_SHAKE256.random_scalars.length,
+    ...BLS12381_SHAKE256.mocked_random_scalars_options
+  },
+  output: BLS12381_SHAKE256.random_scalars
+}, {
   name: 'Valid Single Message Signature',
   operation: 'Sign',
   parameters: {
@@ -297,6 +305,15 @@ BLS12381_SHA256.fixtures = [{
       BLS12381_SHA256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
   },
   output: BLS12381_SHA256.message_scalars
+}, {
+  only: true,
+  name: 'Random Scalars',
+  operation: 'mocked_calculate_random_scalars',
+  parameters: {
+    count: BLS12381_SHA256.random_scalars.length,
+    ...BLS12381_SHA256.mocked_random_scalars_options
+  },
+  output: BLS12381_SHA256.random_scalars
 }, {
   name: 'Valid Single Message Signature',
   operation: 'Sign',

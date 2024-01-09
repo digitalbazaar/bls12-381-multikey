@@ -2,13 +2,15 @@
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import * as chai from 'chai';
-import {create_generators, messages_to_scalars} from '../lib/bbs/util.js';
+import {
+  create_generators, messages_to_scalars, mocked_calculate_random_scalars
+} from '../lib/bbs/util.js';
 import {ProofGen, Sign} from '../lib/bbs/interface.js';
 import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
 chai.should();
 
 const OPERATIONS = {
-  create_generators, messages_to_scalars,
+  create_generators, messages_to_scalars, mocked_calculate_random_scalars,
   Sign, ProofGen
 };
 
