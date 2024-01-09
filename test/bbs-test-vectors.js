@@ -134,6 +134,21 @@ BLS12381_SHAKE256.fixtures = [{
     domain: h2b('6f7ee8de30835599bb540d2cb4dd02fd0c6cf8246f14c9ee9a8463f7fd400f7b')
   }
 }, {
+  name: 'No Header Valid Signature',
+  operation: 'Sign',
+  parameters: {
+    SK: BLS12381_SHAKE256.SK,
+    PK: BLS12381_SHAKE256.PK,
+    header: new Uint8Array(),
+    messages: MESSAGES
+  },
+  // signature
+  output: h2b('abfa513cdb323e47214b7c182fb623197a0681b753f897545a73d82ee133a8ecf69db9aa09fe425df4e7687d99d779db5c66199c0dc9d2a442d331c43f56e060edc69a69ed2f13de3813b98ce6b05737'),
+  debug: {
+    B: h2b('8607ebc413b397c1e27ce591d1daa39f73da329018bda0f90bf996355cc28c3cdba19feeb81e35be9e1503a018e4086e'),
+    domain: h2b('333d8686761cff65a3a2ef20bfa217d37bdf19105e87c210e9ce64ea1210a157'),
+  }
+}, {
   name: 'Valid Single Message Proof',
   operation: 'ProofGen',
   parameters: {
@@ -341,6 +356,21 @@ BLS12381_SHA256.fixtures = [{
   debug: {
     B: h2b('84f48376f7df6af40bc329cf484cdbfd0b19d0b326fccab4e9d8f00d1dbcf48139d498b19667f203cf8a1d1f8340c522'),
     domain: h2b('6272832582a0ac96e6fe53e879422f24c51680b25fbf17bad22a35ea93ce5b47')
+  }
+}, {
+  name: 'No Header Valid Signature',
+  operation: 'Sign',
+  parameters: {
+    SK: BLS12381_SHA256.SK,
+    PK: BLS12381_SHA256.PK,
+    header: new Uint8Array(),
+    messages: MESSAGES
+  },
+  // signature
+  output: h2b('ae0b1807865598b3884e3e9b110e8faec662050dc9b4d95309d957fd30f6fc24161f6f8b5680f1f5d1b547be221547915ca665c7b3087a336d5e0c5fcfea62576afd13e563b730ef6d6d81f9944ab95b'),
+  debug: {
+    B: h2b('98e38eadb6a2232cf91f41861089cda14d7e3ddef0c6eaba4d11a2732f66408f394d58301ffcc8fcfb3c89bb75136f61'),
+    domain: h2b('41c5fe0290d0da734ce9bba57bfe0dfc14f3f9cfef18a0d7438cf2075fd71cc7'),
   }
 }, {
   name: 'Valid Single Message Proof',
