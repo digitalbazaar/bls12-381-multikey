@@ -4,9 +4,10 @@
 import * as chai from 'chai';
 import {ProofGen, Sign} from '../lib/bbs/interface.js';
 import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
+import {messages_to_scalars} from '../lib/bbs/util.js';
 chai.should();
 
-const OPERATIONS = {Sign, ProofGen};
+const OPERATIONS = {Sign, ProofGen, messages_to_scalars};
 
 describe.only('BBS test vectors', () => {
   for(const tv of CIPHERSUITES_TEST_VECTORS) {
