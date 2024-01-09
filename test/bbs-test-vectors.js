@@ -125,7 +125,7 @@ BLS12381_SHAKE256.fixtures = [{
     SK: BLS12381_SHAKE256.SK,
     PK: BLS12381_SHAKE256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: MESSAGES.slice()
+    messages: MESSAGES
   },
   // signature
   output: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
@@ -140,7 +140,7 @@ BLS12381_SHAKE256.fixtures = [{
     PK: BLS12381_SHAKE256.PK,
     signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [MESSAGES[0]],
     disclosed_indexes: [0],
     mocked_random_scalars_options:
@@ -168,8 +168,8 @@ BLS12381_SHAKE256.fixtures = [{
     PK: BLS12381_SHAKE256.PK,
     signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: MESSAGES.slice(),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
     disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     mocked_random_scalars_options:
       BLS12381_SHAKE256.mocked_random_scalars_options
@@ -196,13 +196,8 @@ BLS12381_SHAKE256.fixtures = [{
     PK: BLS12381_SHAKE256.PK,
     signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: [
-      MESSAGES[0],
-      MESSAGES[2],
-      MESSAGES[4],
-      MESSAGES[6]
-    ],
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
     disclosed_indexes: [0, 2, 4, 6],
     mocked_random_scalars_options:
       BLS12381_SHAKE256.mocked_random_scalars_options
@@ -318,7 +313,6 @@ BLS12381_SHA256.fixtures = [{
   },
   output: BLS12381_SHA256.random_scalars
 }, {
-  only: true,
   name: 'Valid Single Message Signature',
   operation: 'Sign',
   parameters: {
@@ -334,14 +328,13 @@ BLS12381_SHA256.fixtures = [{
     domain: h2b('25d57fab92a8274c68fde5c3f16d4b275e4a156f211ae34b3ab32fbaf506ed5c'),
   }
 }, {
-  only: true,
   name: 'Valid Multi-Message Signature',
   operation: 'Sign',
   parameters: {
     SK: BLS12381_SHA256.SK,
     PK: BLS12381_SHA256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: MESSAGES.slice(),
+    messages: MESSAGES,
   },
   // signature
   output: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
@@ -354,9 +347,9 @@ BLS12381_SHA256.fixtures = [{
   operation: 'ProofGen',
   parameters: {
     PK: BLS12381_SHA256.PK,
-    signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
+    signature: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [MESSAGES[0]],
     disclosed_indexes: [0],
     mocked_random_scalars_options:
@@ -375,17 +368,25 @@ BLS12381_SHA256.fixtures = [{
     },
     T1: h2b('8ce960f5155d05a1795cc3422e6c975f6436a9b70c17ffbfd776346c93a9682bb6c74abd70d8c32781ae783ec45ea005'),
     T2: h2b('ab9543a6b04303e997621d3d5cbd85924e7e69da498a2a9e9d3a8b01f39259c9c5920bd530de1d3b0afb99eb0c549d5a'),
-    domain: h2b('25d57fab92a8274c68fde5c3f16d4b275e4a156f211ae34b3ab32fbaf506ed5c')
+    domain: h2b('25d57fab92a8274c68fde5c3f16d4b275e4a156f211ae34b3ab32fbaf506ed5c'),
+    // proof details
+    Abar: h2b('a7c217109e29ecab846691eaad757beb8cc93356daf889856d310af5fc5587ea4f8b70b0d960c68b7aefa62cae806baa'),
+    Bbar: h2b('8edeca19ca3dd884fb977fc43d946dc2a0be8778ec9ff7a1dae2b49c1b5d75d775ba37652ae759b9bb70ba484c74c8b2'),
+    D: h2b('aeea5597befbb651827b5eed5a66f1a959bb46cfd5ca1a817a14475960f69b32c54db7587b5ee3ab665fbd37b506830a'),
+    eHat: h2s('0fdc9a7f71072daabd4cdb49038f5c55e84623400d5f78043a18f76b272fd656'),
+    r1Hat: h2s('67373702763570c8a2f7c837574f6c6c7d9619b0834303c0f55b2314cec804b3'),
+    r3Hat: h2s('3833c7047865587b8e55619123183f832021dd97439f324fa3ad90ec45417070'),
+    challenge: h2s('067fb8c56b2af454562358b1509632f92f2116c020fe7de1ba242effdb36e980')
   }
 }, {
   name: 'Valid Multi-Message, All Messages Disclosed Proof',
   operation: 'ProofGen',
   parameters: {
     PK: BLS12381_SHA256.PK,
-    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: MESSAGES.slice(),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
     disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     mocked_random_scalars_options:
       BLS12381_SHA256.mocked_random_scalars_options
@@ -410,15 +411,10 @@ BLS12381_SHA256.fixtures = [{
   operation: 'ProofGen',
   parameters: {
     PK: BLS12381_SHA256.PK,
-    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
     header: h2b('11223344556677889900aabbccddeeff'),
-    presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: [
-      MESSAGES[0],
-      MESSAGES[2],
-      MESSAGES[4],
-      MESSAGES[6]
-    ],
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
     disclosed_indexes: [0, 2, 4, 6],
     mocked_random_scalars_options:
       BLS12381_SHA256.mocked_random_scalars_options
