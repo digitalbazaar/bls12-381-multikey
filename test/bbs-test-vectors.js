@@ -189,6 +189,56 @@ BLS12381_SHAKE256.fixtures = [{
   },
   output: false
 }, {
+  name: 'Extra Unsigned Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
+    messages: [MESSAGES[0], MESSAGES[1]]
+  },
+  output: false
+}, {
+  name: 'Missing Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    messages: [MESSAGES[0], MESSAGES[1]]
+  },
+  output: false
+}, {
+  name: 'Reordered Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    messages: MESSAGES.slice().reverse()
+  },
+  output: false
+}, {
+  name: 'Wrong Public Key Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: h2b('b24c723803f84e210f7a95f6265c5cbfa4ecc51488bf7acf24b921807801c0798b725b9a2dcfa29953efcdfef03328720196c78b2e613727fd6e085302a0cc2d8d7e1d820cf1d36b20e79eee78c13a1a5da51a298f1aef86f07bc33388f089d8'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    messages: MESSAGES
+  },
+  output: false
+}, {
+  name: 'Wrong Header Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    header: h2b('ffeeddccbbaa00998877665544332211'),
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    messages: MESSAGES
+  },
+  output: false
+}, {
   name: 'Valid Single Message Proof',
   operation: 'ProofGen',
   parameters: {
@@ -450,6 +500,56 @@ BLS12381_SHA256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     signature: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
     messages: [new Uint8Array()]
+  },
+  output: false
+}, {
+  name: 'Extra Unsigned Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
+    messages: [MESSAGES[0], MESSAGES[1]]
+  },
+  output: false
+}, {
+  name: 'Missing Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    messages: [MESSAGES[0], MESSAGES[1]]
+  },
+  output: false
+}, {
+  name: 'Reordered Message Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    messages: MESSAGES.slice().reverse()
+  },
+  output: false
+}, {
+  name: 'Wrong Public Key Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: h2b('b064bd8d1ba99503cbb7f9d7ea00bce877206a85b1750e5583dd9399828a4d20610cb937ea928d90404c239b2835ffb104220a9c66a4c9ed3b54c0cac9ea465d0429556b438ceefb59650ddf67e7a8f103677561b7ef7fe3c3357ec6b94d41c6'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    messages: MESSAGES
+  },
+  output: false
+}, {
+  name: 'Wrong Header Signature (negative)',
+  operation: 'Verify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    header: h2b('ffeeddccbbaa00998877665544332211'),
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    messages: MESSAGES
   },
   output: false
 }, {
