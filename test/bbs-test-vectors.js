@@ -71,6 +71,15 @@ export const BLS12381_SHAKE256 = {
 };
 
 BLS12381_SHAKE256.fixtures = [{
+  name: 'Message Scalars',
+  operation: 'messages_to_scalars',
+  parameters: {
+    messages: MESSAGES.slice(),
+    api_id: TEXT_ENCODER.encode(
+      BLS12381_SHAKE256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+  },
+  output: BLS12381_SHAKE256.message_scalars
+}, {
   name: 'Valid Single Message Signature',
   operation: 'Sign',
   parameters: {
@@ -246,6 +255,15 @@ export const BLS12381_SHA256 = {
 };
 
 BLS12381_SHA256.fixtures = [{
+  name: 'Message Scalars',
+  operation: 'messages_to_scalars',
+  parameters: {
+    messages: MESSAGES.slice(),
+    api_id: TEXT_ENCODER.encode(
+      BLS12381_SHA256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+  },
+  output: BLS12381_SHA256.message_scalars
+}, {
   name: 'Valid Single Message Signature',
   operation: 'Sign',
   parameters: {
