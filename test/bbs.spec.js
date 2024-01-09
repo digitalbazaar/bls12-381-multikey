@@ -12,14 +12,16 @@ describe.only('BBS test vectors', () => {
   for(const tv of CIPHERSUITES_TEST_VECTORS) {
     const {ciphersuite, fixtures} = tv;
     describe(ciphersuite.name, () => {
-      for(const {name, operation, parameters, output} of fixtures) {
+      const only = fixtures.filter(({only}) => only);
+      const tests = only.length > 0 ? only : fixtures;
+      for(const {name, operation, parameters, output} of tests) {
         it(name, async () => {
           const op = OPERATIONS[operation];
           if(!op) {
             throw new Error(`Unknown operation "${operation}".`);
           }
           const result = await op({...parameters, ciphersuite});
-          result.deep.equal(output);
+          result.should.deep.eql(output);
         });
       }
     });
