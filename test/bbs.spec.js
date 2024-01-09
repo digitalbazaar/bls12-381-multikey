@@ -1,8 +1,8 @@
 /*!
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
+import * as chai from 'chai';
 import {ProofGen, Sign} from '../lib/bbs/interface.js';
-import chai from 'chai';
 import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
 chai.should();
 
