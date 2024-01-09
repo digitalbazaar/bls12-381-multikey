@@ -6,7 +6,7 @@ import {os2ip} from '../lib/bbs/util.js';
 
 const TEXT_ENCODER = new TextEncoder();
 
-export const messages = [
+export const MESSAGES = [
   h2b('9872ad089e452c7b6e283dfac2a80d58e8d0ff71cc4d5e310a1debdda4a45f02'),
   h2b('c344136d9ab02da4dd5908bbba913ae6f58c2cc844b802a6f811f5fb075f9b80'),
   h2b('7372e9daa5ed31e6cd5c825eac1b855e84476a1d94932aa348e07b73'),
@@ -77,7 +77,7 @@ BLS12381_SHAKE256.fixtures = [{
     SK: BLS12381_SHAKE256.SK,
     PK: BLS12381_SHAKE256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: [BLS12381_SHAKE256[0]]
+    messages: [MESSAGES[0]]
   },
   // signature
   output: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
@@ -92,7 +92,7 @@ BLS12381_SHAKE256.fixtures = [{
     SK: BLS12381_SHAKE256.SK,
     PK: BLS12381_SHAKE256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: BLS12381_SHAKE256.slice()
+    messages: MESSAGES.slice()
   },
   // signature
   output: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
@@ -108,7 +108,7 @@ BLS12381_SHAKE256.fixtures = [{
     signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: [BLS12381_SHAKE256[0]],
+    messages: [MESSAGES[0]],
     disclosed_indexes: [0]
   },
   // proof
@@ -134,7 +134,7 @@ BLS12381_SHAKE256.fixtures = [{
     signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: BLS12381_SHAKE256.slice(),
+    messages: MESSAGES.slice(),
     disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   },
   // proof
@@ -161,10 +161,10 @@ BLS12381_SHAKE256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [
-      BLS12381_SHAKE256[0],
-      BLS12381_SHAKE256[2],
-      BLS12381_SHAKE256[4],
-      BLS12381_SHAKE256[6],
+      MESSAGES[0],
+      MESSAGES[2],
+      MESSAGES[4],
+      MESSAGES[6]
     ],
     disclosed_indexes: [0, 2, 4, 6]
   },
@@ -252,7 +252,7 @@ BLS12381_SHA256.fixtures = [{
     SK: BLS12381_SHA256.SK,
     PK: BLS12381_SHA256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: [BLS12381_SHA256[0]]
+    messages: [MESSAGES[0]]
   },
   // signature
   output: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
@@ -267,7 +267,7 @@ BLS12381_SHA256.fixtures = [{
     SK: BLS12381_SHA256.SK,
     PK: BLS12381_SHA256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
-    messages: BLS12381_SHA256.slice(),
+    messages: MESSAGES.slice(),
   },
   // signature
   output: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
@@ -283,7 +283,7 @@ BLS12381_SHA256.fixtures = [{
     signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: [BLS12381_SHA256[0]],
+    messages: [MESSAGES[0]],
     disclosed_indexes: [0]
   },
   // proof
@@ -309,7 +309,7 @@ BLS12381_SHA256.fixtures = [{
     signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
-    messages: BLS12381_SHA256.slice(),
+    messages: MESSAGES.slice(),
     disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   },
   // proof
@@ -336,10 +336,10 @@ BLS12381_SHA256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [
-      BLS12381_SHA256[0],
-      BLS12381_SHA256[2],
-      BLS12381_SHA256[4],
-      BLS12381_SHA256[6],
+      MESSAGES[0],
+      MESSAGES[2],
+      MESSAGES[4],
+      MESSAGES[6]
     ],
     disclosed_indexes: [0, 2, 4, 6]
   },
