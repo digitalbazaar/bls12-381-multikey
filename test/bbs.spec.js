@@ -25,11 +25,11 @@ describe.only('BBS test vectors', () => {
       const only = fixtures.filter(({only}) => only);
       const tests = only.length > 0 ? only : fixtures;
       for(const {name, operation, parameters, output} of tests) {
+        const op = OPERATIONS[operation];
+        if(!op) {
+          throw new Error(`Unknown operation "${operation}".`);
+        }
         it(operation + ' - ' + name, async () => {
-          const op = OPERATIONS[operation];
-          if(!op) {
-            throw new Error(`Unknown operation "${operation}".`);
-          }
           const result = await op({...parameters, ciphersuite});
           result.should.deep.eql(output);
         });
