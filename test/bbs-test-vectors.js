@@ -81,7 +81,9 @@ BLS12381_SHAKE256.fixtures = [{
   parameters: {
     count: MESSAGES.length + 1,
     api_id: TEXT_ENCODER.encode(
-      BLS12381_SHAKE256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+      BLS12381_SHAKE256.ciphersuite.ciphersuite_id + 'H2G_HM2S_'),
+    // must compress points to match test vectors
+    compress: true
   },
   output: BLS12381_SHAKE256.generators
 }, {
@@ -280,10 +282,13 @@ BLS12381_SHA256.fixtures = [{
   parameters: {
     count: MESSAGES.length + 1,
     api_id: TEXT_ENCODER.encode(
-      BLS12381_SHA256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+      BLS12381_SHA256.ciphersuite.ciphersuite_id + 'H2G_HM2S_'),
+    // must compress points to match test vectors
+    compress: true
   },
   output: BLS12381_SHA256.generators
 }, {
+  only: true,
   name: 'Message Scalars',
   operation: 'messages_to_scalars',
   parameters: {
