@@ -18,7 +18,8 @@ describe.only('BBS test vectors', () => {
           if(!op) {
             throw new Error(`Unknown operation "${operation}".`);
           }
-          const result = await op({...parameters, ciphersuite});
+          const {ciphersuite_id} = ciphersuite;
+          const result = await op({...parameters, ciphersuite_id});
           result.deep.equal(output);
         });
       }
