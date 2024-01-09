@@ -1,9 +1,9 @@
 /*!
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
-import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
-import {Sign, ProofGen} from '../lib/bbs/interface.js';
+import {ProofGen, Sign} from '../lib/bbs/interface.js';
 import chai from 'chai';
+import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
 chai.should();
 
 const OPERATIONS = {Sign, ProofGen};
