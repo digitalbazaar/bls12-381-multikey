@@ -1,9 +1,9 @@
 /*!
- * Copyright (c) 2023 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import * as base58 from 'base58-universal';
-import {ECDSA_CURVE} from '../lib/constants.js';
 import * as EcdsaMultikey from '../lib/index.js';
+import {ECDSA_CURVE} from '../lib/constants.js';
 import {stringToUint8Array} from '../test/text-encoder.js';
 
 // generates ECDSA key pair
