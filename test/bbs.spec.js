@@ -5,13 +5,13 @@ import * as chai from 'chai';
 import {
   create_generators, messages_to_scalars, mocked_calculate_random_scalars
 } from '../lib/bbs/util.js';
-import {ProofGen, Sign, Verify} from '../lib/bbs/interface.js';
+import {ProofGen, ProofVerify, Sign, Verify} from '../lib/bbs/interface.js';
 import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
 chai.should();
 
 const OPERATIONS = {
   create_generators, messages_to_scalars, mocked_calculate_random_scalars,
-  Sign, ProofGen, Verify
+  ProofGen, ProofVerify, Sign, Verify
 };
 
 describe.only('BBS test vectors', () => {
