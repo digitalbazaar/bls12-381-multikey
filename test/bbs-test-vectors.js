@@ -142,7 +142,9 @@ BLS12381_SHAKE256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [MESSAGES[0]],
-    disclosed_indexes: [0]
+    disclosed_indexes: [0],
+    mocked_random_scalars_options:
+      BLS12381_SHAKE256.mocked_random_scalars_options
   },
   // proof
   output: h2b('89b485c2c7a0cd258a5d265a6e80aae416c52e8d9beaf0e38313d6e5fe31e7f7dcf62023d130fbc1da747440e61459b1929194f5527094f56a7e812afb7d92ff2c081654c6d5a70e369474267f1c7f769d47160cd92d79f66bb86e994c999226b023d58ee44d660434e6ba60ed0da1a5d2cde031b483684cd7c5b13295a82f57e209b584e8fe894bcc964117bf3521b468cc9c6ba22419b3e567c7f72b6af815ddeca161d6d5270c3e8f269cdabb7d60230b3c66325dcf6caf39bcca06d889f849d301e7f30031fdeadc443a7575de547259ffe5d21a45e5a0da9b113512f7b124f031b0b8329a8625715c9245033ae13dfadd6bdb0b4364952647db3d7b91faa4c24cbb65344c03473c5065bb414ff7'),
@@ -168,7 +170,9 @@ BLS12381_SHAKE256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: MESSAGES.slice(),
-    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    mocked_random_scalars_options:
+      BLS12381_SHAKE256.mocked_random_scalars_options
   },
   // proof
   output: h2b('80ff9367fda28896618e8ede02481d660fe80bfce51a46bebe7e1d6a4c751d60e09e87cd8d1e2a078d0838de56b6a7ca94651eec82e5f689b4dfc7e3c879ff7e33906271b17af20eab678d64903515971e39484e712fd3c8a45f279c1e058955b3dd7ed57aaadc348361e2501a17317352e555a333e014e8e7d71eef808ae4f8fbdf45cd19fde45038bb310d5135f5205611672c8d50d505af8a6e038729230458a6ceb663fa048f4ce3a7a92998de4200882156ba6b6e60d855c0645d2fdd628518d2e6fc5221b7456ccbc1c5210a1704e4d662dddd1f99a767344a7944ab7f9b6f9d9069de4a132e4feebb6d70a87b0856635e1b8b8ca49e2992f8c80221398e08935824f959a821b4120cdfb5e6be'),
@@ -199,7 +203,9 @@ BLS12381_SHAKE256.fixtures = [{
       MESSAGES[4],
       MESSAGES[6]
     ],
-    disclosed_indexes: [0, 2, 4, 6]
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHAKE256.mocked_random_scalars_options
   },
   // proof
   output: h2b('853f4927bd7e4998af27df65566c0a071a33a5207d1af33ef7c3be04004ac5da860f34d35c415498af32729720ca4d92977bbbbd60fdc70ddbb2588878675b90815273c9eaf0caa1123fe5d0c4833fefc459d18e1dc83d669268ec702c0e16a6b73372346feb94ab16189d4c525652b8d3361bab43463700720ecfb0ee75e595ea1b13330615011050a0dfcffdb21af36ac442df87545e0e8303260a97a0d251de15fc1447b82fff6b47ffb0ff94022869b315dc48c9302523b2715ddec9f56975a0892f5f3aeed3203c29c7a03cfc79187eef45f72b7c5bf0d4fc852adcc7528c05b0ba9554f2eb9b39c168a4dd6bdc3ac603ce14856184f6d713139f9d3930efcc9842e724517dbccff6912088b399447ff786e2f9db8b1061cc89a1636ba9282344729bcd19228ccde2318286c5a115baaf317b48341ac7906c6cc957f94b060351563907dca7f598a4cbdaeab26c4a4fcb6aa7ff6fd999c5f9bc0c9a9b0e4f4a3301de901a6c68b174ed24ccf5cd0cac6726766c91aded6947c4b446a9dfc8ec0aa11ec9ddda57dcc22c554a83a25471be93ae69ad9234b1fc3d133550d7ff570a4bc6555cd0bf23ee1b2a994b2434ea222bc221ba1615adc53b47ba99fc5a66495585d4c86f1f0aecb18df802b8'),
@@ -284,7 +290,6 @@ BLS12381_SHA256.generators.Q_1 = BLS12381_SHA256.generators[0];
 BLS12381_SHA256.generators.H = BLS12381_SHA256.generators.slice(1);
 
 BLS12381_SHA256.fixtures = [{
-  only: true,
   name: 'Message Generators',
   operation: 'create_generators',
   parameters: {
@@ -296,7 +301,6 @@ BLS12381_SHA256.fixtures = [{
   },
   output: BLS12381_SHA256.generators
 }, {
-  only: true,
   name: 'Message Scalars',
   operation: 'messages_to_scalars',
   parameters: {
@@ -306,7 +310,6 @@ BLS12381_SHA256.fixtures = [{
   },
   output: BLS12381_SHA256.message_scalars
 }, {
-  only: true,
   name: 'Random Scalars',
   operation: 'mocked_calculate_random_scalars',
   parameters: {
@@ -315,6 +318,7 @@ BLS12381_SHA256.fixtures = [{
   },
   output: BLS12381_SHA256.random_scalars
 }, {
+  only: true,
   name: 'Valid Single Message Signature',
   operation: 'Sign',
   parameters: {
@@ -330,6 +334,7 @@ BLS12381_SHA256.fixtures = [{
     domain: h2b('25d57fab92a8274c68fde5c3f16d4b275e4a156f211ae34b3ab32fbaf506ed5c'),
   }
 }, {
+  only: true,
   name: 'Valid Multi-Message Signature',
   operation: 'Sign',
   parameters: {
@@ -353,7 +358,9 @@ BLS12381_SHA256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: [MESSAGES[0]],
-    disclosed_indexes: [0]
+    disclosed_indexes: [0],
+    mocked_random_scalars_options:
+      BLS12381_SHA256.mocked_random_scalars_options
   },
   // proof
   output: h2b('a7c217109e29ecab846691eaad757beb8cc93356daf889856d310af5fc5587ea4f8b70b0d960c68b7aefa62cae806baa8edeca19ca3dd884fb977fc43d946dc2a0be8778ec9ff7a1dae2b49c1b5d75d775ba37652ae759b9bb70ba484c74c8b2aeea5597befbb651827b5eed5a66f1a959bb46cfd5ca1a817a14475960f69b32c54db7587b5ee3ab665fbd37b506830a0fdc9a7f71072daabd4cdb49038f5c55e84623400d5f78043a18f76b272fd65667373702763570c8a2f7c837574f6c6c7d9619b0834303c0f55b2314cec804b33833c7047865587b8e55619123183f832021dd97439f324fa3ad90ec45417070067fb8c56b2af454562358b1509632f92f2116c020fe7de1ba242effdb36e980'),
@@ -379,7 +386,9 @@ BLS12381_SHA256.fixtures = [{
     header: h2b('11223344556677889900aabbccddeeff'),
     presentation_header: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
     messages: MESSAGES.slice(),
-    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    mocked_random_scalars_options:
+      BLS12381_SHA256.mocked_random_scalars_options
   },
   // proof
   output: h2b('a6faacf33f935d1910f21b1bbe380adcd2de006773896a5bd2afce31a13874298f92e602a4d35aef5880786cffc5aaf08978484f303d0c85ce657f463b71905ee7c3c0c9038671d8fb925525f623745dc825b14fc50477f3de79ce8d915d841ba73c8c97264177a76c4a03341956d2ae45ed3438ce598d5cda4f1bf9507fecef47855480b7b30b5e4052c92a4360110c322b4cb2d9796ff2d741979226249dc14d4b1fd5ca1a8f6fdfc16f726fc7683e3605d5ec28d331111a22ed81729cbb3c8c3732c7593e445f802fc3169c26857622ed31bc058fdfe68d25f0c3b9615279719c64048ea9cdb74104b27757c2d01035507d39667d77d990ec5bda22c866fcc9fe70bb5b7826a2b4e861b6b8124fbd'),
@@ -410,7 +419,9 @@ BLS12381_SHA256.fixtures = [{
       MESSAGES[4],
       MESSAGES[6]
     ],
-    disclosed_indexes: [0, 2, 4, 6]
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHA256.mocked_random_scalars_options
   },
   // proof
   output: h2b('a8da259a5ae7a9a8e5e4e809b8e7718b4d7ab913ed5781ebbff4814c762033eda4539973ed9bf557f882192518318cc4916fdffc857514082915a31df5bbb79992a59fd68dc3b48d19d2b0ad26be92b4cf78a30f472c0fd1e558b9d03940b077897739228c88afc797916dca01e8f03bd9c5375c7a7c59996e514bb952a436afd24457658acbaba5ddac2e693ac481352bb6fce6084eb1867c71caeac2afc4f57f4d26504656b798b3e4009eb227c7fa41b6ae00daae0436d853e86b32b366b0a9929e1570369e9c61b7b177eb70b7ff27326c467c362120dfeacc0692d25ccdd62d733ff6e8614abd16b6b63a7b78d11632cf41bc44856aee370fee6690a637b3b1d8d8525aff01cd3555c39d04f8ee1606964c2da8b988897e3d27cb444b8394acc80876d3916c485c9f36098fed6639f12a6a6e67150a641d7485656408e9ae22b9cb7ec77e477f71c1fe78cab3ee5dd62c34dd595edb15cbce061b29192419dfadcdee179f134dd8feb9323c426c51454168ffacb65021995848e368a5c002314b508299f67d85ad0eaaaac845cb029927191152edee034194cca3ae0d45cbd2f5e5afd1f9b8a3dd903adfa17ae43a191bf3119df57214f19e662c7e01e8cc2eb6b038bc7d707f2f3e13545909e0'),
