@@ -69,8 +69,22 @@ export const BLS12381_SHAKE256 = {
     h2s('6474fceba35e7e17365dde1a0284170180e446ae96c82943290d7baa3a6ed429')
   ]
 };
+// convert generator to points
+BLS12381_SHAKE256.generators = BLS12381_SHAKE256.generators.map(
+  g => BLS12381_SHAKE256.ciphersuite.octets_to_point_E1(g));
+BLS12381_SHAKE256.generators.Q_1 = BLS12381_SHAKE256.generators[0];
+BLS12381_SHAKE256.generators.H = BLS12381_SHAKE256.generators.slice(1);
 
 BLS12381_SHAKE256.fixtures = [{
+  name: 'Message Generators',
+  operation: 'create_generators',
+  parameters: {
+    count: MESSAGES.length + 1,
+    api_id: TEXT_ENCODER.encode(
+      BLS12381_SHAKE256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+  },
+  output: BLS12381_SHAKE256.generators
+}, {
   name: 'Message Scalars',
   operation: 'messages_to_scalars',
   parameters: {
@@ -253,9 +267,23 @@ export const BLS12381_SHA256 = {
     h2s('485e2adab17b76f5334c95bf36c03ccf91cef77dcfcdc6b8a69e2090b3156663')
   ]
 };
+// convert generator to points
+BLS12381_SHA256.generators = BLS12381_SHA256.generators.map(
+  g => BLS12381_SHA256.ciphersuite.octets_to_point_E1(g));
+BLS12381_SHA256.generators.Q_1 = BLS12381_SHA256.generators[0];
+BLS12381_SHA256.generators.H = BLS12381_SHA256.generators.slice(1);
 
 BLS12381_SHA256.fixtures = [{
   only: true,
+  name: 'Message Generators',
+  operation: 'create_generators',
+  parameters: {
+    count: MESSAGES.length + 1,
+    api_id: TEXT_ENCODER.encode(
+      BLS12381_SHA256.ciphersuite.ciphersuite_id + 'H2G_HM2S_')
+  },
+  output: BLS12381_SHA256.generators
+}, {
   name: 'Message Scalars',
   operation: 'messages_to_scalars',
   parameters: {
