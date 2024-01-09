@@ -16,7 +16,7 @@ export const MESSAGES = [
   h2b('d183ddc6e2665aa4e2f088af'),
   h2b('ac55fb33a75909ed'),
   h2b('96012096'),
-  new Uint8Array()
+  h2b('')
 ];
 
 /* eslint-disable max-len */
@@ -139,7 +139,7 @@ BLS12381_SHAKE256.fixtures = [{
   parameters: {
     SK: BLS12381_SHAKE256.SK,
     PK: BLS12381_SHAKE256.PK,
-    header: new Uint8Array(),
+    header: h2b(''),
     messages: MESSAGES
   },
   // signature
@@ -174,7 +174,7 @@ BLS12381_SHAKE256.fixtures = [{
   parameters: {
     PK: BLS12381_SHAKE256.PK,
     signature: h2b('abfa513cdb323e47214b7c182fb623197a0681b753f897545a73d82ee133a8ecf69db9aa09fe425df4e7687d99d779db5c66199c0dc9d2a442d331c43f56e060edc69a69ed2f13de3813b98ce6b05737'),
-    header: new Uint8Array(),
+    header: h2b(''),
     messages: MESSAGES
   },
   output: true
@@ -185,7 +185,7 @@ BLS12381_SHAKE256.fixtures = [{
     PK: BLS12381_SHAKE256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
     signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
-    messages: [new Uint8Array()]
+    messages: [h2b('')]
   },
   output: false
 }, {
@@ -329,6 +329,43 @@ BLS12381_SHAKE256.fixtures = [{
     T2: h2b('8655584d3da1313f881f48c239384a5623d2d292f08dae7ac1d8129c19a02a89b82fa45de3f6c2c439510fce5919656f'),
     domain: h2b('6f7ee8de30835599bb540d2cb4dd02fd0c6cf8246f14c9ee9a8463f7fd400f7b')
   }
+}, {
+  name: 'No Header Valid Proof',
+  operation: 'ProofGen',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('abfa513cdb323e47214b7c182fb623197a0681b753f897545a73d82ee133a8ecf69db9aa09fe425df4e7687d99d779db5c66199c0dc9d2a442d331c43f56e060edc69a69ed2f13de3813b98ce6b05737'),
+    header: h2b(''),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHAKE256.mocked_random_scalars_options
+  },
+  // proof
+  output: h2b('ada2a57ae3d869255d1533f74317b131ad4f0f24cae413ac40028d70f0cf0372b503ff6e705220532727002b8958ebf987e2e8378984afe3214511b9feeee830ffe3121ed005d2c382c04e6db37b646bc2f7002f3699648570fe9b67a0a5aac995644ee738810772d90c1033f1dfe45c0b1b453d131170aafa8a99f812f3b90a5d1d9e6bd05a4dee6a50dd277ffc646f6b676faadceff172a0002325e7f22f47ed9b5125f30dd5fffe9ed1dc99dc283100cb702fa63aaef1bd1f530a5368ca4c7e78a01c7fcc3563b25c6c10c0e063092cbe2590fdfcc7b6a2859e482796f1f6783a41dfdf133ce28d13071b77cbe7fe06bf6e138bd3323e7edc4a6ec9942bfa0b6d1287836e2b1c2db84833d8325d145e6d2a3e94ddd5b6f58c1d1b2a15a854f7cf46711239ebe522bf5e428131e31e2f5f322eba2399fa7a8efec4be722dcaf6ec6adaf84af72c3d7690072d07928045327f3a6587102b066fb9cf96b27aca7f5698a2ec66d04efa05ed57fd6ac27636322c013a168100b733269e9bd6f23d7562affebafc3d9b3c5f54a0c57216b733f8ecb24dc292c17e18b6b8e0f3b8303dfaedee84fba02d491994b95f965deb3c1295545bb9802d98449d98d1af18e9c60536146cfa7aa267bd888b25552dd2'),
+  debug: {
+    challenge: h2s('1cc198830295ccc56e5f9527216765105eee34324c5f3834154943608a8ca652')
+  }
+}, {
+  only: true,
+  name: 'No Presentation Header Valid Proof',
+  operation: 'ProofGen',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b(''),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHAKE256.mocked_random_scalars_options
+  },
+  // proof
+  output: h2b('853f4927bd7e4998af27df65566c0a071a33a5207d1af33ef7c3be04004ac5da860f34d35c415498af32729720ca4d92977bbbbd60fdc70ddbb2588878675b90815273c9eaf0caa1123fe5d0c4833fefc459d18e1dc83d669268ec702c0e16a6b73372346feb94ab16189d4c525652b8d3361bab43463700720ecfb0ee75e595ea1b13330615011050a0dfcffdb21af37286b5d6012208605b7c3fe5457936db502aa7eec43ae4a9d1bdf5f675153d521b1e587c6ddd195e80358667aae42e64754595a0d35c1d6e72f147f67f591c823e75340360615b9c0173445afe53002d4face239979f697eff7183826449d4dc285a15e0c6afec9289b0b39e0741d0c4925c090f722569b8c64e2829904a02ec1ab6340cfe999a59196bbb8da2be2a89ddd84378dba0a22533e76fd6ac14f2b52a3972b041950539c19debaf7454e6ef3b9cec23086dc26b8a104e319aa4394e4e376c133d6c00133daf2f414e1df8ebca2de0a23e6ba37663f8074b9c8f440e37459bc08a8a4a587b78b2102c81b2f48f0fa73c331f7b6f64f6d8d50f3f8cb1424626f9cf3171cdea7f8cedb7bbb5a269856b37e8ba16ba8604fb1681be22dc6b64827a8326691524b7c05ac462ec8d8eee64bc6e09df622bb974fba93a75f8'),
+  debug: {
+    domain: h2b('6f7ee8de30835599bb540d2cb4dd02fd0c6cf8246f14c9ee9a8463f7fd400f7b')
+  }
 }];
 /* eslint-enable max-len */
 
@@ -453,7 +490,7 @@ BLS12381_SHA256.fixtures = [{
   parameters: {
     SK: BLS12381_SHA256.SK,
     PK: BLS12381_SHA256.PK,
-    header: new Uint8Array(),
+    header: h2b(''),
     messages: MESSAGES
   },
   // signature
@@ -487,7 +524,7 @@ BLS12381_SHA256.fixtures = [{
   operation: 'Verify',
   parameters: {
     PK: BLS12381_SHA256.PK,
-    header: new Uint8Array(),
+    header: h2b(''),
     signature: h2b('ae0b1807865598b3884e3e9b110e8faec662050dc9b4d95309d957fd30f6fc24161f6f8b5680f1f5d1b547be221547915ca665c7b3087a336d5e0c5fcfea62576afd13e563b730ef6d6d81f9944ab95b'),
     messages: MESSAGES
   },
@@ -499,7 +536,7 @@ BLS12381_SHA256.fixtures = [{
     PK: BLS12381_SHA256.PK,
     header: h2b('11223344556677889900aabbccddeeff'),
     signature: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
-    messages: [new Uint8Array()]
+    messages: [h2b('')]
   },
   output: false
 }, {
@@ -651,6 +688,43 @@ BLS12381_SHA256.fixtures = [{
     T2: h2b('8f5f191c956aefd5c960e57d2dfbab6761eb0ebc5efdba1aca1403dcc19e05296b16c9feb7636cb4ef2a360c5a148483'),
     domain: h2b('6272832582a0ac96e6fe53e879422f24c51680b25fbf17bad22a35ea93ce5b47')
   }
+}, {
+  name: 'No Header Valid Proof',
+  operation: 'ProofGen',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('ae0b1807865598b3884e3e9b110e8faec662050dc9b4d95309d957fd30f6fc24161f6f8b5680f1f5d1b547be221547915ca665c7b3087a336d5e0c5fcfea62576afd13e563b730ef6d6d81f9944ab95b'),
+    header: h2b(''),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHA256.mocked_random_scalars_options
+  },
+  // proof
+  output: h2b('958783d7d535fe1860a71ad5a7cf42df6527246300e3f3d94d67639c7e8a7dbcf3f082f63e3b1bcc1cdad71e1f6d5f0d821c4c6bb4b2dcdfe945491d4f4a23d10752431d364fcbdd199c753f0beee7ffe02abbad57384244294ef7c2031d9c50ac310574f509c712bb1a181d64ea3c1ee075c018a2bc773e2480b5c033ccb9bfea5af347a88ab83746c9342ba76db36771c74f1feec7f67b30e3805d71c8f893837b455d734d360c80e119b00dc63e2756b81a320d659a9a0f1ee57c41773f304c37c278d169faec5f6720bb9187e9333b793a57ba69f27e4b0c2ea35271276fc0011306d6c909cf4d4a7a50dbc9f6ef35d43e2043046dc3041ac0a9b893dfd2dcd147910d719e818b4189a76f791a3600acd76623573c1796262a3914921ec504d0f727c63e16b432f6256db62b9667016e516e97e2ef0bfa3bd192306564df28e019af18c50ca86a0e1d8d6b08b0641e549accd5e34ada8903d55021780865edfa70f63b85f0ddaf50787f8ced8eee658f2dd61673d2cbeca2aa2a5b649c22501b72cc7ee2d10bc9fe3aa3a7e169dc070d90b37735488cd0c27517ffd634b99c1dc016a4086d24feff6f19f3c92fa11cc198830295ccc56e5f9527216765105eee34324c5f3834154943608a8ca652'),
+  debug: {
+    domain: h2b('41c5fe0290d0da734ce9bba57bfe0dfc14f3f9cfef18a0d7438cf2075fd71cc7'),
+    challenge: h2s('1cc198830295ccc56e5f9527216765105eee34324c5f3834154943608a8ca652')
+  }
+}, {
+  name: 'No Presentation Header Valid Proof',
+  operation: 'ProofGen',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b(''),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6],
+    mocked_random_scalars_options:
+      BLS12381_SHA256.mocked_random_scalars_options
+  },
+  // proof
+  output: h2b('a8da259a5ae7a9a8e5e4e809b8e7718b4d7ab913ed5781ebbff4814c762033eda4539973ed9bf557f882192518318cc4916fdffc857514082915a31df5bbb79992a59fd68dc3b48d19d2b0ad26be92b4cf78a30f472c0fd1e558b9d03940b077897739228c88afc797916dca01e8f03bd9c5375c7a7c59996e514bb952a436afd24457658acbaba5ddac2e693ac481356d60aa96c9b53ff5c63b3930bbcb3940f2132b7dcd800be4afbffd3325ecedaf033d354de52e12e924b32dd13c2f7cebef3614a4a519ff94d1bcceb7e22562ab4a5729a74cc3746558e25469651d7da37f714951c2ca03fc364a2272d13b2dee53412f97f42dfd6b57ae92fc7cb4859f418d6a912f5c446002cbf96ee6b8f4a849577a43ef303592c33e03608a9ca93066084bdfb3d3974ba322b7523d48fc9b35227e776c994b0e2da1587b496660836a7307a2125eae5912be3ea839bb4db16a21cc394c9a63fce91040d8321b30313677f7cbc4a9119fd0849aacef25fe9336db2dcbd85a2e3fd2ca2efff623c13e6c48b832c9e07dbe4337320dd0264a573f25bb46876e8153db47de2f0176db68cca1f55406a78c89c1a65716c00e9230098c6a9690a190b20720a7662ccd13b392fe08d045b99d5010f625cd74f7e90a'),
+  debug: {
+    domain: h2b('6272832582a0ac96e6fe53e879422f24c51680b25fbf17bad22a35ea93ce5b47')
+  }
 }];
 /* eslint-enable max-len */
 
@@ -661,6 +735,9 @@ export const CIPHERSUITES_TEST_VECTORS = [
 
 // hex => bytes
 function h2b(hex) {
+  if(hex.length === 0) {
+    return new Uint8Array();
+  }
   return Uint8Array.from(hex.match(/.{1,2}/g).map(h => parseInt(h, 16)));
 }
 
