@@ -2,12 +2,15 @@
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import * as chai from 'chai';
+import {create_generators, messages_to_scalars} from '../lib/bbs/util.js';
 import {ProofGen, Sign} from '../lib/bbs/interface.js';
 import {CIPHERSUITES_TEST_VECTORS} from './bbs-test-vectors.js';
-import {messages_to_scalars} from '../lib/bbs/util.js';
 chai.should();
 
-const OPERATIONS = {Sign, ProofGen, messages_to_scalars};
+const OPERATIONS = {
+  create_generators, messages_to_scalars,
+  Sign, ProofGen
+};
 
 describe.only('BBS test vectors', () => {
   for(const tv of CIPHERSUITES_TEST_VECTORS) {
