@@ -1,6 +1,7 @@
 /*!
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
+import {CIPHERSUITES} from '../lib/bbs/ciphersuites.js';
 import {os2ip} from '../lib/bbs/util.js';
 
 const TEXT_ENCODER = new TextEncoder();
@@ -20,6 +21,7 @@ export const messages = [
 
 /* eslint-disable max-len */
 export const BLS12381_SHAKE256 = {
+  ciphersuite: CIPHERSUITES.BLS12381_SHAKE256,
   key_material: h2b('746869732d49532d6a7573742d616e2d546573742d494b4d2d746f2d67656e65726174652d246528724074232d6b6579'),
   key_info: h2b('746869732d49532d736f6d652d6b65792d6d657461646174612d746f2d62652d757365642d696e2d746573742d6b65792d67656e'),
   key_dst: h2b('4242535f424c53313233383147315f584f463a5348414b452d3235365f535357555f524f5f4832475f484d32535f4b455947454e5f4453545f'),
@@ -193,6 +195,7 @@ BLS12381_SHAKE256.fixtures = [{
 
 /* eslint-disable max-len */
 export const BLS12381_SHA256 = {
+  ciphersuite: CIPHERSUITES.BLS12381_SHA256,
   key_material: h2b('746869732d49532d6a7573742d616e2d546573742d494b4d2d746f2d67656e65726174652d246528724074232d6b6579'),
   key_info: h2b('746869732d49532d736f6d652d6b65792d6d657461646174612d746f2d62652d757365642d696e2d746573742d6b65792d67656e'),
   key_dst: h2b('4242535f424c53313233383147315f584d443a5348412d3235365f535357555f524f5f4832475f484d32535f4b455947454e5f4453545f'),
@@ -364,6 +367,12 @@ BLS12381_SHA256.fixtures = [{
   }
 }];
 /* eslint-enable max-len */
+
+export const CIPHERSUITES_TEST_VECTORS = [
+  // FIXME: enable
+  //BLS12381_SHAKE256,
+  BLS12381_SHA256
+];
 
 // hex => bytes
 function h2b(hex) {
