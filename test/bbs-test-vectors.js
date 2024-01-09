@@ -445,8 +445,7 @@ BLS12381_SHA256.fixtures = [{
 /* eslint-enable max-len */
 
 export const CIPHERSUITES_TEST_VECTORS = [
-  // FIXME: enable
-  //BLS12381_SHAKE256,
+  BLS12381_SHAKE256,
   BLS12381_SHA256
 ];
 
