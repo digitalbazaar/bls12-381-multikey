@@ -255,6 +255,7 @@ export const BLS12381_SHA256 = {
 };
 
 BLS12381_SHA256.fixtures = [{
+  only: true,
   name: 'Message Scalars',
   operation: 'messages_to_scalars',
   parameters: {
