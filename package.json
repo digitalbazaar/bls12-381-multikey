@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "c8": "^9.0.0",
-    "chai": "^5.0.0",
+    "chai": "^4.4.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.16.0",
     "eslint-config-digitalbazaar": "^5.0.1",
