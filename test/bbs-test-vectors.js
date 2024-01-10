@@ -527,6 +527,66 @@ BLS12381_SHAKE256.fixtures = [{
     disclosed_indexes: [0]
   },
   output: false
+}, {
+  name: 'Valid Single Message Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('98eb37fceb31115bf647f2983aef578ad895e55f7451b1add02fa738224cb89a31b148eace4d20d001be31d162c58d12574f30e68665b6403956a83b23a16f1daceacce8c5fde25d3defd52d6d5ff2e1'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: [MESSAGES[0]],
+    disclosed_indexes: [0]
+  },
+  output: true
+}, {
+  name: 'Valid Multi-Message, All Messages Disclosed Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  },
+  output: true
+}, {
+  name: 'Valid Multi-Message, Some Messages Disclosed Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
+}, {
+  name: 'No Header Valid Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('abfa513cdb323e47214b7c182fb623197a0681b753f897545a73d82ee133a8ecf69db9aa09fe425df4e7687d99d779db5c66199c0dc9d2a442d331c43f56e060edc69a69ed2f13de3813b98ce6b05737'),
+    header: h2b(''),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
+}, {
+  name: 'No Presentation Header Valid Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHAKE256.PK,
+    signature: h2b('97a296c83ed3626fe254d26021c5e9a087b580f1e8bc91bb51efb04420bfdaca215fe376a0bc12440bcc52224fb33c696cca9239b9f28dcddb7bd850aae9cd1a9c3e9f3639953fe789dbba53b8f0dd6f'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b(''),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
 }];
 /* eslint-enable max-len */
 
@@ -1045,6 +1105,66 @@ BLS12381_SHA256.fixtures = [{
     disclosed_indexes: [0]
   },
   output: false
+}, {
+  name: 'Valid Single Message Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('88c0eb3bc1d97610c3a66d8a3a73f260f95a3028bccf7fff7d9851e2acd9f3f32fdf58a5b34d12df8177adf37aa318a20f72be7d37a8e8d8441d1bc0bc75543c681bf061ce7e7f6091fe78c1cb8af103'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: [MESSAGES[0]],
+    disclosed_indexes: [0]
+  },
+  output: true
+}, {
+  name: 'Valid Multi-Message, All Messages Disclosed Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  },
+  output: true
+}, {
+  name: 'Valid Multi-Message, Some Messages Disclosed Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
+}, {
+  name: 'No Header Valid Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('ae0b1807865598b3884e3e9b110e8faec662050dc9b4d95309d957fd30f6fc24161f6f8b5680f1f5d1b547be221547915ca665c7b3087a336d5e0c5fcfea62576afd13e563b730ef6d6d81f9944ab95b'),
+    header: h2b(''),
+    ph: h2b('bed231d880675ed101ead304512e043ade9958dd0241ea70b4b3957fba941501'),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
+}, {
+  name: 'No Presentation Header Valid Proof',
+  operation: 'ProofGenAndProofVerify',
+  parameters: {
+    PK: BLS12381_SHA256.PK,
+    signature: h2b('895cd9c0ccb9aca4de913218655346d718711472f2bf1f3e68916de106a0d93cf2f47200819b45920bbda541db2d91480665df253fedab2843055bdc02535d83baddbbb2803ec3808e074f71f199751e'),
+    header: h2b('11223344556677889900aabbccddeeff'),
+    ph: h2b(''),
+    messages: MESSAGES,
+    disclosed_indexes: [0, 2, 4, 6]
+  },
+  output: true
 }];
 /* eslint-enable max-len */
 
