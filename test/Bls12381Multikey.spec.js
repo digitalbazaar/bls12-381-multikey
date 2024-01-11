@@ -42,12 +42,41 @@ describe('Bls12381Multikey', () => {
   });
 
   describe('generateBbsKeyPair', () => {
-    it('should generate a BBS key pair', async () => {
+    it('should generate a (SHA-256) BBS key pair', async () => {
       let keyPair;
       let error;
       try {
         keyPair = await Bls12381Multikey.generateBbsKeyPair({
           algorithm: ALGORITHMS.BBS_BLS12381_SHA256
+        });
+      } catch(e) {
+        error = e;
+      }
+      should.not.exist(error);
+
+      expect(keyPair).to.have.property('publicKeyMultibase');
+      expect(keyPair).to.have.property('secretKeyMultibase');
+      expect(keyPair).to.have.property('publicKey');
+      expect(keyPair.publicKey).to.be.a('Uint8Array');
+      expect(keyPair).to.have.property('secretKey');
+      expect(keyPair.secretKey).to.be.a('Uint8Array');
+      expect(keyPair).to.have.property('export');
+      expect(keyPair).to.have.property('signer');
+      expect(keyPair).to.have.property('verifier');
+      const secretKeyBytes = base58.decode(
+        keyPair.secretKeyMultibase.slice(1));
+      const publicKeyBytes = base58.decode(
+        keyPair.publicKeyMultibase.slice(1));
+      secretKeyBytes.length.should.equal(34);
+      publicKeyBytes.length.should.equal(98);
+    });
+
+    it('should generate a (SHAKE-256) BBS key pair', async () => {
+      let keyPair;
+      let error;
+      try {
+        keyPair = await Bls12381Multikey.generateBbsKeyPair({
+          algorithm: ALGORITHMS.BBS_BLS12381_SHAKE256
         });
       } catch(e) {
         error = e;
@@ -182,65 +211,75 @@ describe('Bls12381Multikey', () => {
   });
 
   describe('fromJwk/toJwk', () => {
-    it('should round-trip secret JWKs', async () => {
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({
-        id: '4e0db4260c87cc200df3',
-        algorithm: ALGORITHMS.BBS_BLS12381_SHA256
-      });
-      const jwk1 = await Bls12381Multikey.toJwk({keyPair, secretKey: true});
-      should.exist(jwk1.d);
-      const keyPairImported = await Bls12381Multikey.fromJwk(
-        {jwk: jwk1, secretKey: true});
-      const jwk2 = await Bls12381Multikey.toJwk(
-        {keyPair: keyPairImported, secretKey: true});
-      expect(jwk1).to.eql(jwk2);
-    });
+    for(const algorithm of Object.values(ALGORITHMS)) {
+      describe(algorithm, () => {
+        it('should round-trip secret JWKs', async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            id: '4e0db4260c87cc200df3',
+            algorithm
+          });
+          const jwk1 = await Bls12381Multikey.toJwk({keyPair, secretKey: true});
+          should.exist(jwk1.d);
+          const keyPairImported = await Bls12381Multikey.fromJwk(
+            {jwk: jwk1, secretKey: true});
+          const jwk2 = await Bls12381Multikey.toJwk(
+            {keyPair: keyPairImported, secretKey: true});
+          expect(jwk1).to.eql(jwk2);
+        });
 
-    it('should round-trip public JWKs', async () => {
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({
-        id: '4e0db4260c87cc200df3',
-        algorithm: ALGORITHMS.BBS_BLS12381_SHA256
-      });
-      const jwk1 = await Bls12381Multikey.toJwk({keyPair});
-      should.not.exist(jwk1.d);
-      const keyPairImported = await Bls12381Multikey.fromJwk({jwk: jwk1});
-      const jwk2 = await Bls12381Multikey.toJwk({keyPair: keyPairImported});
-      expect(jwk1).to.eql(jwk2);
-    });
+        it('should round-trip public JWKs', async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            id: '4e0db4260c87cc200df3',
+            algorithm: ALGORITHMS.BBS_BLS12381_SHA256
+          });
+          const jwk1 = await Bls12381Multikey.toJwk({keyPair});
+          should.not.exist(jwk1.d);
+          const keyPairImported = await Bls12381Multikey.fromJwk({jwk: jwk1});
+          const jwk2 = await Bls12381Multikey.toJwk({keyPair: keyPairImported});
+          expect(jwk1).to.eql(jwk2);
+        });
 
-    it('should multikey-round-trip secret JWKs', async () => {
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({
-        id: '4e0db4260c87cc200df3',
-        algorithm: ALGORITHMS.BBS_BLS12381_SHA256
-      });
-      const jwk1 = await Bls12381Multikey.toJwk({keyPair, secretKey: true});
-      should.exist(jwk1.d);
-      const keyPairImported = await Bls12381Multikey.fromJwk(
-        {jwk: jwk1, secretKey: true});
-      const multikey = await keyPairImported.export({
-        publicKey: true, secretKey: true, includeContext: true
-      });
-      const multikeyImported = await Bls12381Multikey.from(multikey);
-      const jwk2 = await Bls12381Multikey.toJwk(
-        {keyPair: multikeyImported, secretKey: true});
-      expect(jwk1).to.eql(jwk2);
-    });
+        it('should multikey-round-trip secret JWKs', async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            id: '4e0db4260c87cc200df3',
+            algorithm: ALGORITHMS.BBS_BLS12381_SHAKE256
+          });
+          const jwk1 = await Bls12381Multikey.toJwk({keyPair, secretKey: true});
+          should.exist(jwk1.d);
+          const keyPairImported = await Bls12381Multikey.fromJwk(
+            {jwk: jwk1, secretKey: true});
+          const multikey = await keyPairImported.export({
+            publicKey: true, secretKey: true, includeContext: true
+          });
+          const multikeyImported = await Bls12381Multikey.from(multikey, {
+            algorithm: ALGORITHMS.BBS_BLS12381_SHAKE256
+          });
+          const jwk2 = await Bls12381Multikey.toJwk(
+            {keyPair: multikeyImported, secretKey: true});
+          expect(jwk1).to.eql(jwk2);
+        });
 
-    it('should multikey-round-trip public JWKs', async () => {
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({
-        id: '4e0db4260c87cc200df3',
-        algorithm: ALGORITHMS.BBS_BLS12381_SHA256
+        it('should multikey-round-trip public JWKs', async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            id: '4e0db4260c87cc200df3',
+            algorithm: ALGORITHMS.BBS_BLS12381_SHAKE256
+          });
+          const jwk1 = await Bls12381Multikey.toJwk({keyPair});
+          should.not.exist(jwk1.d);
+          const keyPairImported = await Bls12381Multikey.fromJwk({jwk: jwk1});
+          const multikey = await keyPairImported.export({
+            publicKey: true, includeContext: true
+          });
+          const multikeyImported = await Bls12381Multikey.from(multikey, {
+            algorithm: ALGORITHMS.BBS_BLS12381_SHAKE256
+          });
+          const jwk2 = await Bls12381Multikey.toJwk({
+            keyPair: multikeyImported
+          });
+          expect(jwk1).to.eql(jwk2);
+        });
       });
-      const jwk1 = await Bls12381Multikey.toJwk({keyPair});
-      should.not.exist(jwk1.d);
-      const keyPairImported = await Bls12381Multikey.fromJwk({jwk: jwk1});
-      const multikey = await keyPairImported.export({
-        publicKey: true, includeContext: true
-      });
-      const multikeyImported = await Bls12381Multikey.from(multikey);
-      const jwk2 = await Bls12381Multikey.toJwk({keyPair: multikeyImported});
-      expect(jwk1).to.eql(jwk2);
-    });
+    }
 
     it('should import JWK with compressed public key', async () => {
       const keyPairImported = await Bls12381Multikey.fromJwk(
@@ -276,46 +315,56 @@ describe('Bls12381Multikey', () => {
   });
 
   describe('fromRaw', () => {
-    it('should import raw public key', async () => {
-      const algorithm = ALGORITHMS.BBS_BLS12381_SHA256;
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({algorithm});
+    for(const algorithm of Object.values(ALGORITHMS)) {
+      describe(algorithm, () => {
+        it(`should import raw public key`, async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            algorithm
+          });
 
-      // first export
-      const expectedPublicKey = base58.decode(
-        keyPair.publicKeyMultibase.slice(1)).slice(2);
-      const {publicKey} = await keyPair.export({publicKey: true, raw: true});
-      expect(expectedPublicKey).to.deep.equal(publicKey);
+          // first export
+          const expectedPublicKey = base58.decode(
+            keyPair.publicKeyMultibase.slice(1)).slice(2);
+          const {publicKey} = await keyPair.export({
+            publicKey: true, raw: true
+          });
+          expect(expectedPublicKey).to.deep.equal(publicKey);
 
-      // then import
-      const imported = await Bls12381Multikey.fromRaw({algorithm, publicKey});
+          // then import
+          const imported = await Bls12381Multikey.fromRaw({
+            algorithm, publicKey
+          });
 
-      // then re-export to confirm
-      const {publicKey: publicKey2} = await imported.export(
-        {publicKey: true, raw: true});
-      expect(expectedPublicKey).to.deep.equal(publicKey2);
-    });
+          // then re-export to confirm
+          const {publicKey: publicKey2} = await imported.export(
+            {publicKey: true, raw: true});
+          expect(expectedPublicKey).to.deep.equal(publicKey2);
+        });
 
-    it('should import raw secret key', async () => {
-      const algorithm = ALGORITHMS.BBS_BLS12381_SHA256;
-      const keyPair = await Bls12381Multikey.generateBbsKeyPair({algorithm});
+        it(`should import raw secret key`, async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            algorithm
+          });
 
-      // first export
-      const expectedSecretKey = base58.decode(
-        keyPair.secretKeyMultibase.slice(1)).slice(2);
-      const {secretKey, publicKey} = await keyPair.export(
-        {secretKey: true, raw: true});
-      expect(expectedSecretKey).to.deep.equal(secretKey);
+          // first export
+          const expectedSecretKey = base58.decode(
+            keyPair.secretKeyMultibase.slice(1)).slice(2);
+          const {secretKey, publicKey} = await keyPair.export(
+            {secretKey: true, raw: true});
+          expect(expectedSecretKey).to.deep.equal(secretKey);
 
-      // then import
-      const imported = await Bls12381Multikey.fromRaw({
-        algorithm, secretKey, publicKey
+          // then import
+          const imported = await Bls12381Multikey.fromRaw({
+            algorithm, secretKey, publicKey
+          });
+
+          // then re-export to confirm
+          const {secretKey: secretKey2} = await imported.export(
+            {secretKey: true, raw: true});
+          expect(expectedSecretKey).to.deep.equal(secretKey2);
+        });
       });
-
-      // then re-export to confirm
-      const {secretKey: secretKey2} = await imported.export(
-        {secretKey: true, raw: true});
-      expect(expectedSecretKey).to.deep.equal(secretKey2);
-    });
+    }
   });
 });
 

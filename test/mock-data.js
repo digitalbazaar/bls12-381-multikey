@@ -30,4 +30,14 @@ export const blsJwk = {
   "y": "BVkkrVEib-P_FMPHNtqxJymP3pV-H8fCdvPkoWInpFfM9tViyqD8JAmwDf64zU2hBV_vvCQ632ScAooEExXuz1IeQH9D2o-uY_dAjZ37YHuRMEyzh8Tq-90JHQvicOqx",
   "d": "hR6HfxlTwcjMGST5wYnkGiJvuVnpUPbvXSGsvwjJhUM"
 };
+
+/* example of BBS-BLS12-381-SHAKE-256 JWK
+export const shake256Jwk = {
+  kty: 'OKP',
+  alg: 'BBS-BLS12-381-SHAKE-256',
+  crv: 'Bls12381G2',
+  x: 'qWpt_expd-t8JVTajVLBVeNfjYLLmRecqlDs_L6WfvRmoaBndHTp33uoAa3L_E1SDt8U_KXnqyhIa6nauAoh8_fVodlzP-ocQOmJfFyRdhLTOL2kbYWS1NETBhtAfSsO',
+  d: 'NJeOmjJ4bOeV9TksyhvPrVeb8CHwCalxoly5YKcL_sc'
+}
+*/
 /* eslint-enable */
