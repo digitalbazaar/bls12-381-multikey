@@ -1,9 +1,9 @@
-# EcdsaMultikey Key Pair Library for Linked Data _(@digitalbazaar/ecdsa-multikey)_
+# Bls12381Multikey Key Pair Library _(@digitalbazaar/bls12-381-multikey)_
 
-[![Node.js CI](https://github.com/digitalbazaar/ecdsa-multikey/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/ecdsa-multikey/actions?query=workflow%3A%22Node.js+CI%22)
-[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/ecdsa-multikey.svg)](https://npm.im/@digitalbazaar/ecdsa-multikey)
+[![Node.js CI](https://github.com/digitalbazaar/bls12-381-multikey/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/bls12-381-multikey/actions?query=workflow%3A%22Node.js+CI%22)
+[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/bls12-381-multikey.svg)](https://npm.im/@digitalbazaar/bls12-381-multikey)
 
-> Javascript library for generating and working with EcdsaMultikey key pairs.
+> JavaScript library for using Bls12381Multikey key pairs with BBS
 
 ## Table of Contents
 
@@ -19,9 +19,9 @@
 
 For use with:
 
-* [`@digitalbazaar/ecdsa-2019-cryptosuite`](https://github.com/digitalbazaar/ecdsa-2019-cryptosuite) `^1.0.0`
-  crypto suite (with [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^11.0.0`)
-* [`@digitalbazaar/data-integrity`](https://github.com/digitalbazaar/data-integrity) `^1.0.0`
+* [`@digitalbazaar/bbs-2023-cryptosuite`](https://github.com/digitalbazaar/bbs-2023-cryptosuite) `^1.0.0`
+  crypto suite (with [`jsonld-signatures`](https://github.com/digitalbazaar/jsonld-signatures) `^11.2.0`)
+* [`@digitalbazaar/data-integrity`](https://github.com/digitalbazaar/data-integrity) `^2.0.0`
 
 See also (related specs):
 
@@ -34,32 +34,34 @@ your system will largely depend on your design decisions.
 
 ## Install
 
-- Node.js 16+ is required.
+- Node.js 18+ is required.
 
 To install locally (for development):
 
 ```
-git clone https://github.com/digitalbazaar/ecdsa-multikey.git
-cd ecdsa-multikey
+git clone https://github.com/digitalbazaar/bls12-381-multikey.git
+cd bls12-381-multikey
 npm install
 ```
 
 ## Usage
 
-### Generating a new public/secret key pair
+### Generating a new public/secret key pair for use with BBS signatures
 
-To generate a new public/secret key pair:
+To generate a new public/secret key pair for use with BBS signatures:
 
-* `{string} [curve]` \[Required\] ECDSA curve used to generate the key:
-  \['P-256', 'P-384', 'P-521'\].
+* `{string} [algorithm]` \[Required\] Algorithm to be used with the key pair:
+  \['BBS-BLS12-381-SHA-256'\].
 * `{string} [id]` \[Optional\] ID for the generated key.
 * `{string} [controller]` \[Optional\] Controller URI or DID to initialize the
   generated key. (This will be used to generate `id` if it is not explicitly defined.)
 
 ```js
-import * as EcdsaMultikey from '@digitalbazaar/ecdsa-multikey';
+import * as Bls12381Multikey from '@digitalbazaar/bls12-381-multikey';
 
-const keyPair = await EcdsaMultikey.generate({curve: 'P-384'});
+const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+  algorithm: Bls12381Multikey.ALGORITHMS.BBS_BLS12381_SHA256
+});
 ```
 
 ### Importing a key pair from storage
@@ -70,7 +72,7 @@ storage, use `.from()`:
 ```js
 const serializedKeyPair = { ... };
 
-const keyPair = await EcdsaMultikey.from(serializedKeyPair);
+const keyPair = await Bls12381Multikey.from(serializedKeyPair);
 ````
 
 ### Exporting the public key only
@@ -82,9 +84,9 @@ await keyPair.export({publicKey: true});
 // ->
 {
   type: 'Multikey',
-  id: 'did:example:1234#zDnaeSMnptAKpH4AD41vTkwzjznW7yNetdRh9FJn8bJsbsdbw',
+  id: 'did:example:1234#zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv',
   controller: 'did:example:1234',
-  publicKeyMultibase: 'zDnaeSMnptAKpH4AD41vTkwzjznW7yNetdRh9FJn8bJsbsdbw'
+  publicKeyMultibase: 'zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv'
 }
 ```
 
@@ -98,41 +100,66 @@ await keyPair.export({publicKey: true, secretKey: true});
 // ->
 {
   type: 'Multikey',
-  id: 'did:example:1234#zDnaeSMnptAKpH4AD41vTkwzjznW7yNetdRh9FJn8bJsbsdbw',
+  id: 'did:example:1234#zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv',
   controller: 'did:example:1234',
-  publicKeyMultibase: 'zDnaeSMnptAKpH4AD41vTkwzjznW7yNetdRh9FJn8bJsbsdbw',
-  secretKeyMultibase: 'z42twirSb1PULt5Sg6gjgNMsdiLycu6fbA83aX1vVb8e3ncP'
+  publicKeyMultibase: 'zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv',
+  secretKeyMultibase: 'z488vexJQSQ2rF5GrCT8qhzGR7ASSj5rx6CtZjKNFq183woF'
 }
 ```
 
-### Creating a signer function
+### Creating a BBS signature using a signer
 
-In order to perform a cryptographic signature, you need to create a `sign`
-function, and then invoke it.
+In order to perform a cryptographic signature, you need to create a
+`signer` instance and call `multisign()` on it.
 
 ```js
-const keyPair = EcdsaMultikey.generate({curve: 'P-256'});
+const keyPair = Bls12381Multikey.generateBbsKeyPair({
+  algorithm: 'BBS-BLS12-381-SHA-256'
+});
 
-const {sign} = keyPair.signer();
+const signer = keyPair.signer();
 
-// data is a Uint8Array of bytes
-const data = (new TextEncoder()).encode('test data goes here');
-// Signing also outputs a Uint8Array, which you can serialize to text etc.
-const signature = await sign({data});
+// header is a Uint8Array
+const header = new Uint8Array();
+// message is an array of Uint8Arrays
+const messages = [new TextEncoder().encode('test data goes here')];
+// creates a BBS signature over the messages expressed in a Uint8Array
+const signature = await signer.multisign({header, messages});
 ```
 
-### Creating a verifier function
+### Deriving a BBS proof from a BBS signature
 
-In order to verify a cryptographic signature, you need to create a `verify`
-function, and then invoke it (passing it the data to verify, and the signature).
+Derive a proof from a BBS signature as a holder / prover.
 
 ```js
-const keyPair = EcdsaMultikey.generate({curve: 'P-521'});
+// no `secretKey` needs to be present on `keyPair` to derive a proof, only
+// the `publicKey` is required
 
-const {verify} = keyPair.verifier();
+// pass original signer's `publicKey`, `signature`, `header`, and `messages`
+// as well as a custom `presentationHeader` and any `disclosedMessageIndexes`
+const proof = await keyPair.deriveProof({
+  signature, header, messages,
+  presentationHeader: new Uint8Array(),
+  disclosedMessageIndexes: [1]
+});
+// `proof` is a `Uint8Array` containing a BBS proof
+```
 
-const valid = await verify({data, signature});
-// true
+### Verifying a BBS proof using a verifier
+
+In order to verify a BBS proof, you need to create a `verifier` instance
+and call `multiverify()` on it.
+
+```js
+const verifier = keyPair.verifier();
+
+const verified = await verifier.multiverify({
+  proof, header,
+  presentationHeader,
+  // leave holes for messages that were not disclosed
+  messages: [undefined, messages[1]]
+});
+// returns `true` or `false`
 ```
 
 ## Contribute
