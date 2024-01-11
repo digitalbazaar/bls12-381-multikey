@@ -3,6 +3,7 @@
  */
 // note: this multikey has the same key material as `jpaJwk` below
 export const mockMultikey = {
+  '@context': 'https://w3id.org/security/multikey/v1',
   type: 'Multikey',
   controller: 'did:example:1234',
   // eslint-disable-next-line max-len
@@ -31,13 +32,21 @@ export const blsJwk = {
   "d": "hR6HfxlTwcjMGST5wYnkGiJvuVnpUPbvXSGsvwjJhUM"
 };
 
-/* example of BBS-BLS12-381-SHAKE-256 JWK
+/* example of BBS-BLS12-381-SHAKE-256 key in multikey + JWK format
+export const mockMultikeyShake256 = {
+  '@context': 'https://w3id.org/security/multikey/v1',
+  type: 'Multikey',
+  controller: 'did:example:1234',
+  // eslint-disable-next-line max-len
+  publicKeyMultibase: 'zUC76eySqgji6uNDaCrsWnmQnwq8pj1MZUDrRGc2BGRu61baZPKPFB7YpHawussp2YohcEMAeMVGHQ9JtKvjxgGTkYSMN53ZfCH4pZ6TGYLawvzy1wE54dS6PQcut9fxdHH32gi',
+  secretKeyMultibase: 'z488x5kHU9aUe1weTqaf2sGFPgQS1HhunREFwB9bFeFwLch5',
+};
 export const shake256Jwk = {
   kty: 'OKP',
   alg: 'BBS-BLS12-381-SHAKE-256',
   crv: 'Bls12381G2',
-  x: 'qWpt_expd-t8JVTajVLBVeNfjYLLmRecqlDs_L6WfvRmoaBndHTp33uoAa3L_E1SDt8U_KXnqyhIa6nauAoh8_fVodlzP-ocQOmJfFyRdhLTOL2kbYWS1NETBhtAfSsO',
-  d: 'NJeOmjJ4bOeV9TksyhvPrVeb8CHwCalxoly5YKcL_sc'
+  x: 'kJ59sxOk7HYiZOp6yjH4fjgF4lk1ImT7GfDEP1_imjDQo2oE0kw4SIDnvJBMLCVoAUQi5dlxCLmsp35xedaw1C11WvlSFhkVxwCy3AjmqJsvxvFiaj2hQaSjaHkG_0nz',
+  d: 'LeFnGNo5fCsCHk6-COdjU7V5n-_k86MSYoAJFLhjOlg'
 }
 */
 /* eslint-enable */
