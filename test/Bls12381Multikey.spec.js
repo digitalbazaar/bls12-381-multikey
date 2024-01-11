@@ -88,7 +88,8 @@ describe('Bls12381Multikey', () => {
           });
 
           const expectedProperties = [
-            'id', 'type', 'controller', 'publicKeyMultibase', 'secretKeyMultibase'
+            'id', 'type', 'controller',
+            'publicKeyMultibase', 'secretKeyMultibase'
           ];
           for(const property of expectedProperties) {
             expect(keyPairExported).to.have.property(property);
@@ -109,7 +110,8 @@ describe('Bls12381Multikey', () => {
 
           expect(keyPairExported).not.to.have.property('secretKeyMultibase');
           expect(keyPairExported).to.have.property('publicKeyMultibase');
-          expect(keyPairExported).to.have.property('id', '4e0db4260c87cc200df3');
+          expect(keyPairExported).to.have.property(
+            'id', '4e0db4260c87cc200df3');
           expect(keyPairExported).to.have.property('type', 'Multikey');
         });
 
@@ -135,7 +137,9 @@ describe('Bls12381Multikey', () => {
           });
           const expectedPublicKey = base58.decode(
             keyPair.publicKeyMultibase.slice(1)).slice(2);
-          const {publicKey} = await keyPair.export({publicKey: true, raw: true});
+          const {publicKey} = await keyPair.export({
+            publicKey: true, raw: true
+          });
           expect(expectedPublicKey).to.deep.equal(publicKey);
         });
 
@@ -145,7 +149,9 @@ describe('Bls12381Multikey', () => {
           });
           const expectedSecretKey = base58.decode(
             keyPair.secretKeyMultibase.slice(1)).slice(2);
-          const {secretKey} = await keyPair.export({secretKey: true, raw: true});
+          const {secretKey} = await keyPair.export({
+            secretKey: true, raw: true
+          });
           expect(expectedSecretKey).to.deep.equal(secretKey);
         });
       });
@@ -158,7 +164,7 @@ describe('Bls12381Multikey', () => {
           expect(keyPair.id).to.equal(`did:example:1234#${publicKeyMultibase}`);
         });
 
-        it('should error if publicKeyMultibase property is missing', async () => {
+        it('should error if "publicKeyMultibase" is missing', async () => {
           let error;
           try {
             await Bls12381Multikey.from({});
@@ -180,8 +186,9 @@ describe('Bls12381Multikey', () => {
           });
           const keyPairImported = await Bls12381Multikey.from(keyPairExported);
 
-          expect(await keyPairImported.export({publicKey: true, secretKey: true}))
-            .to.eql(keyPairExported);
+          expect(await keyPairImported.export({
+            publicKey: true, secretKey: true
+          })).to.eql(keyPairExported);
         });
       });
 
