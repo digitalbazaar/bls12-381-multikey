@@ -12,7 +12,7 @@ const {expect} = chai;
 
 const {ALGORITHMS} = Bls12381Multikey;
 
-describe.only('Bls12381Multikey', () => {
+describe('Bls12381Multikey', () => {
   describe('module', () => {
     it('should have proper exports', async () => {
       expect(Bls12381Multikey).to.have.property('ALGORITHMS');

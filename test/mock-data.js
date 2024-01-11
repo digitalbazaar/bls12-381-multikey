@@ -6,8 +6,8 @@ export const mockMultikey = {
   type: 'Multikey',
   controller: 'did:example:1234',
   // eslint-disable-next-line max-len
-  publicKeyMultibase: 'zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv',
-  secretKeyMultibase: 'z488vexJQSQ2rF5GrCT8qhzGR7ASSj5rx6CtZjKNFq183woF'
+  publicKeyMultibase: 'zUC7CeW6j5qisFaD8pAoWyvwuqso2E5WYSGeLFYQEmamVdf87AbE2kXakiYkRkDCKD3Z1Ma8qDrCpjNHA1HG93wA6BmrgRRX9ixGqfxGCv4m8FMSmrypZtoiV7UYxD74TQDeMad',
+  secretKeyMultibase: 'z488ujFYX3ZK6PS9pPiSdppbeNhbxeBVNZHpChXVRULn5gtb'
 };
 
 /* eslint-disable */
