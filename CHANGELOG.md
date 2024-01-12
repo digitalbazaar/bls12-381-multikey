@@ -1,6 +1,6 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
-## 1.1.1 - 2024-01-dd
+## 1.1.1 - 2024-01-11
 
 ### Fixed
 - Fix bug with disclosing message with index zero that would cause it
