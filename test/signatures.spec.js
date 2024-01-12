@@ -28,7 +28,59 @@ describe('signatures', async () => {
         expect(signature).to.be.instanceof(Uint8Array);
       });
 
-      it('should sign, derive, and verify properly', async () => {
+      it('should sign=>derive=>verify w/full message disclosure', async () => {
+        signer.algorithm.should.eql(algorithm);
+        signer.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        verifier.algorithm.should.eql(algorithm);
+        verifier.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        const header = new Uint8Array();
+        const messages = [
+          stringToUint8Array('first message'),
+          stringToUint8Array('second message')
+        ];
+        const signature = await signer.multisign({header, messages});
+        const presentationHeader = new Uint8Array();
+        const proof = await keyPair.deriveProof({
+          signature, header, messages, presentationHeader,
+          disclosedMessageIndexes: [0, 1]
+        });
+        const result = await verifier.multiverify({
+          proof, header, presentationHeader, messages
+        });
+        result.should.be.true;
+      });
+
+      it('should sign=>derive=>verify w/message[0] disclosure', async () => {
+        signer.algorithm.should.eql(algorithm);
+        signer.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        verifier.algorithm.should.eql(algorithm);
+        verifier.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        const header = new Uint8Array();
+        const messages = [
+          stringToUint8Array('first message'),
+          stringToUint8Array('second message')
+        ];
+        const signature = await signer.multisign({header, messages});
+        const presentationHeader = new Uint8Array();
+        const proof = await keyPair.deriveProof({
+          signature, header, messages, presentationHeader,
+          disclosedMessageIndexes: [0]
+        });
+        const result = await verifier.multiverify({
+          proof, header, presentationHeader, messages: [messages[0]]
+        });
+        result.should.be.true;
+      });
+
+      it('should sign=>derive=>verify w/message[1] disclosure', async () => {
         signer.algorithm.should.eql(algorithm);
         signer.should.have.property(
           'id',

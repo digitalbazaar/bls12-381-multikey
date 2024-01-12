@@ -1,5 +1,11 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
+## 1.1.1 - 2024-01-dd
+
+### Fixed
+- Fix bug with disclosing message with index zero that would cause it
+  to not be included in the disclosed indexes array.
+
 ## 1.1.0 - 2024-01-11
 
 ### Added
