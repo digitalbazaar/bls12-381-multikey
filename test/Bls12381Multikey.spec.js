@@ -32,6 +32,7 @@ describe('Bls12381Multikey', () => {
           });
           const signer = keyPair.signer();
           signer.algorithm.should.equal(algorithm);
+          signer.publicKey.should.be.a('Uint8Array');
         });
 
         it('verifier() instance should export proper algorithm', async () => {
@@ -172,8 +173,9 @@ describe('Bls12381Multikey', () => {
             error = e;
           }
           expect(error).to.be.an.instanceof(TypeError);
-          expect(error.message)
-            .to.equal('The "publicKeyMultibase" property is required.');
+          expect(error.message).to.equal(
+            'Either "publicKeyMultibase" or "secretKeyMultibase" ' +
+            'are required.');
         });
 
         it('should round-trip load exported keys', async () => {
