@@ -193,6 +193,24 @@ describe('Bls12381Multikey', () => {
           })).to.eql(keyPairExported);
         });
 
+        it('should import with `@context` array', async () => {
+          const keyPair = await Bls12381Multikey.generateBbsKeyPair({
+            id: '4e0db4260c87cc200df3',
+            algorithm
+          });
+          const keyPairExported = await keyPair.export({
+            publicKey: true, secretKey: true
+          });
+          const keyPairImported = await Bls12381Multikey.from({
+            ...keyPairExported,
+            '@context': [{}, keyPairExported['@context']]
+          });
+
+          expect(await keyPairImported.export({
+            publicKey: true, secretKey: true
+          })).to.eql(keyPairExported);
+        });
+
         it('should import compressed `publicKeyJwk`', async () => {
           const keyPairImported = await Bls12381Multikey.from({
             publicKeyJwk: jpaJwk
