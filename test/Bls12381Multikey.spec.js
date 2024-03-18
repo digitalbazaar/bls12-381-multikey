@@ -192,6 +192,42 @@ describe('Bls12381Multikey', () => {
             publicKey: true, secretKey: true
           })).to.eql(keyPairExported);
         });
+
+        it('should import compressed `publicKeyJwk`', async () => {
+          const keyPairImported = await Bls12381Multikey.from({
+            publicKeyJwk: jpaJwk
+          });
+          const jwk = await Bls12381Multikey.toJwk(
+            {keyPair: keyPairImported, secretKey: true});
+          const expected = {
+            kty: 'OKP',
+            // algorithm is always SHA-256 here
+            alg: ALGORITHMS.BBS_BLS12381_SHA256,
+            crv: 'Bls12381G2',
+            // eslint-disable-next-line max-len
+            x: 'rMvXj_LibMeRrNh2sqmkBqBH4xKeOWmAYK8inVMX1839y6XeolnbT6vxnxU2PmV9FXJ-rtcz6Txe7v2ij1dFzMHuBT1TyBrtEZWtCSOMTIBXpnVsOMMSdhsTB1iUS9o1',
+            d: 'GKvIQj_W51lezMe_U8-k0xd-vedyZK3gHDzONXkXf9I'
+          };
+          expect(jwk).to.eql(expected);
+        });
+
+        it('should import uncompressed `publicKeyJwk`', async () => {
+          const keyPairImported = await Bls12381Multikey.from({
+            publicKeyJwk: blsJwk
+          });
+          const jwk = await Bls12381Multikey.toJwk(
+            {keyPair: keyPairImported, secretKey: true});
+          const expected = {
+            kty: 'OKP',
+            // algorithm is always SHA-256 here
+            alg: ALGORITHMS.BBS_BLS12381_SHA256,
+            crv: 'Bls12381G2',
+            // eslint-disable-next-line max-len
+            x: 'gjs8lstTgoTgXMF6QXdyh3m8k2ixxURGYLMaYylVK_x0F8HhE8zk0YWiGV3CHwpQEa2sH4PBZLaYCn8se-1clmCORDsKxbbw3Js_Alu4OmkV9gmbJsy1YF2rt7Vxzs6S',
+            d: 'Q4XJCL-sIV3v9lDpWblvIhrkicH5JBnMyMFTGX-HHoU'
+          };
+          expect(jwk).to.eql(expected);
+        });
       });
 
       describe('fromJwk/toJwk', () => {
