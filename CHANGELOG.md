@@ -1,6 +1,6 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
-## 1.2.0 - 2024-mm-dd
+## 1.2.0 - 2024-03-17
 
 ### Added
 - Add conversion from `publicKeyJwk` feature via `from()`.
