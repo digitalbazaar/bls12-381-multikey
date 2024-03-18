@@ -205,8 +205,7 @@ describe('Bls12381Multikey', () => {
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
             // eslint-disable-next-line max-len
-            x: 'rMvXj_LibMeRrNh2sqmkBqBH4xKeOWmAYK8inVMX1839y6XeolnbT6vxnxU2PmV9FXJ-rtcz6Txe7v2ij1dFzMHuBT1TyBrtEZWtCSOMTIBXpnVsOMMSdhsTB1iUS9o1',
-            d: 'GKvIQj_W51lezMe_U8-k0xd-vedyZK3gHDzONXkXf9I'
+            x: 'rMvXj_LibMeRrNh2sqmkBqBH4xKeOWmAYK8inVMX1839y6XeolnbT6vxnxU2PmV9FXJ-rtcz6Txe7v2ij1dFzMHuBT1TyBrtEZWtCSOMTIBXpnVsOMMSdhsTB1iUS9o1'
           };
           expect(jwk).to.eql(expected);
         });
@@ -223,8 +222,7 @@ describe('Bls12381Multikey', () => {
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
             // eslint-disable-next-line max-len
-            x: 'gjs8lstTgoTgXMF6QXdyh3m8k2ixxURGYLMaYylVK_x0F8HhE8zk0YWiGV3CHwpQEa2sH4PBZLaYCn8se-1clmCORDsKxbbw3Js_Alu4OmkV9gmbJsy1YF2rt7Vxzs6S',
-            d: 'Q4XJCL-sIV3v9lDpWblvIhrkicH5JBnMyMFTGX-HHoU'
+            x: 'gjs8lstTgoTgXMF6QXdyh3m8k2ixxURGYLMaYylVK_x0F8HhE8zk0YWiGV3CHwpQEa2sH4PBZLaYCn8se-1clmCORDsKxbbw3Js_Alu4OmkV9gmbJsy1YF2rt7Vxzs6S'
           };
           expect(jwk).to.eql(expected);
         });
