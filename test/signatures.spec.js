@@ -2,6 +2,7 @@
  * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import * as Bls12381Multikey from '../lib/index.js';
+import * as cborg from 'cborg';
 import chai from 'chai';
 import {mockMultikey} from './mock-data.js';
 import {stringToUint8Array} from './text-encoder.js';
@@ -28,6 +29,37 @@ describe('signatures', async () => {
         expect(signature).to.be.instanceof(Uint8Array);
       });
 
+      it('can use CBOR-encoded "data" in sign()', async () => {
+        const header = new Uint8Array();
+        const messages = [
+          stringToUint8Array('first message'),
+          stringToUint8Array('second message')
+        ];
+        const data = cborg.encode([header, messages]);
+        const signature = await signer.sign({data});
+        expect(signature).to.be.instanceof(Uint8Array);
+      });
+
+      it('fails with incorrect CBOR-encoded "data" in sign()', async () => {
+        const header = new Uint8Array();
+        const messages = [
+          stringToUint8Array('first message'),
+          stringToUint8Array('second message')
+        ];
+        const data = cborg.encode([header, messages, 'something else']);
+
+        let error;
+        try {
+          await signer.sign({data});
+        } catch(e) {
+          error = e;
+        }
+        expect(error).to.be.an.instanceof(Error);
+        expect(error.message).to.equal(
+          'Sign "data" must be a CBOR-encoded array with two parameters: ' +
+          'the BBS "header" and BBS "messages".');
+      });
+
       it('should sign=>derive=>verify w/full message disclosure', async () => {
         signer.algorithm.should.eql(algorithm);
         signer.should.have.property(
@@ -43,6 +75,33 @@ describe('signatures', async () => {
           stringToUint8Array('second message')
         ];
         const signature = await signer.multisign({header, messages});
+        const presentationHeader = new Uint8Array();
+        const proof = await keyPair.deriveProof({
+          signature, header, messages, presentationHeader,
+          disclosedMessageIndexes: [0, 1]
+        });
+        const result = await verifier.multiverify({
+          proof, header, presentationHeader, messages
+        });
+        result.should.be.true;
+      });
+
+      it('should use CBOR-encoded sign()=>derive=>verify', async () => {
+        signer.algorithm.should.eql(algorithm);
+        signer.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        verifier.algorithm.should.eql(algorithm);
+        verifier.should.have.property(
+          'id',
+          'did:example:1234#' + mockMultikey.publicKeyMultibase);
+        const header = new Uint8Array();
+        const messages = [
+          stringToUint8Array('first message'),
+          stringToUint8Array('second message')
+        ];
+        const data = cborg.encode([header, messages]);
+        const signature = await signer.sign({data});
         const presentationHeader = new Uint8Array();
         const proof = await keyPair.deriveProof({
           signature, header, messages, presentationHeader,
