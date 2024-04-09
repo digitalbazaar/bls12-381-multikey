@@ -1,5 +1,11 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
+## 1.3.0 - 2024-04-dd
+
+### Added
+- Enable use of `sign()` with `data` parameter that is a CBOR-encoded
+  array of all of the required sign parameters (`header` and `messages`).
+
 ## 1.2.0 - 2024-03-17
 
 ### Added
