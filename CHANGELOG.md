@@ -1,6 +1,6 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
-## 1.3.0 - 2024-04-dd
+## 1.3.0 - 2024-04-11
 
 ### Added
 - Enable use of `sign()` with `data` parameter that is a CBOR-encoded
