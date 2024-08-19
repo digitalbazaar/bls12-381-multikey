@@ -1,5 +1,13 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
+## 2.0.0 - 2024-08-dd
+
+### Changed
+- **BREAKING**: Use `@digitalbazaar/bbs-signatures@3` which is updated
+  to the IETF BBS draft 6 spec. This version of the library will produce
+  signatures that are incompatible with previous versions (and any previous
+  signatures should now be considered obsolete and non-interoperable).
+
 ## 1.3.0 - 2024-04-11
 
 ### Added

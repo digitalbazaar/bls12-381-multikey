@@ -14,7 +14,7 @@
     "lib/**/*.js"
   ],
   "dependencies": {
-    "@digitalbazaar/bbs-signatures": "^2.1.0",
+    "@digitalbazaar/bbs-signatures": "^3.0.0",
     "@noble/curves": "^1.3.0",
     "base58-universal": "^2.0.0",
     "base64url-universal": "^2.0.0",
