@@ -1,6 +1,6 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
-## 2.1.0 - 2024-10-dd
+## 2.1.0 - 2024-10-02
 
 ### Added
 - Include `id` and `controller` properties when importing key types of
