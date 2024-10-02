@@ -1,5 +1,11 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
+## 2.1.0 - 2024-10-dd
+
+### Added
+- Include `id` and `controller` properties when importing key types of
+  `JsonWebKey` or `JsonWebKey2020`.
+
 ## 2.0.0 - 2024-08-19
 
 ### Changed
