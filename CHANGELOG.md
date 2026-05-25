@@ -1,5 +1,11 @@
 # @digitalbazaar/bls12-381-multikey ChangeLog
 
+## 2.2.0 - 2026-05-25
+
+### Changed
+- Use `@noble/curves@2.2`. This also requires dropping the EOL node versions
+  18 and 20.
+
 ## 2.1.0 - 2024-10-02
 
 ### Added
