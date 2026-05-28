@@ -1,8 +1,5 @@
 # Bls12381Multikey Key Pair Library _(@digitalbazaar/bls12-381-multikey)_
 
-[![Node.js CI](https://github.com/digitalbazaar/bls12-381-multikey/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalbazaar/bls12-381-multikey/actions?query=workflow%3A%22Node.js+CI%22)
-[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/bls12-381-multikey.svg)](https://npm.im/@digitalbazaar/bls12-381-multikey)
-
 > JavaScript library for using Bls12381Multikey key pairs with BBS
 
 ## Table of Contents
@@ -34,11 +31,22 @@ your system will largely depend on your design decisions.
 
 ## Install
 
-- Node.js 18+ is required.
+This software requires and supports maintained recent versions of Node.js and
+browsers. Updates may remove support for older unmaintained platform versions.
+Please use dependency version lock files and testing to ensure compatibility
+with this software.
+
+To install from NPM:
+
+https://www.npmjs.com/package/@digitalbazaar/bls12-381-multikey
+
+```sh
+npm install @digitalbazaar/bls12-381-multikey
+```
 
 To install locally (for development):
 
-```
+```sh
 git clone https://github.com/digitalbazaar/bls12-381-multikey.git
 cd bls12-381-multikey
 npm install
@@ -73,7 +81,7 @@ storage, use `.from()`:
 const serializedKeyPair = { ... };
 
 const keyPair = await Bls12381Multikey.from(serializedKeyPair);
-````
+```
 
 ### Exporting the public key only
 
@@ -178,4 +186,4 @@ Digital Bazaar: support@digitalbazaar.com
 
 ## License
 
-[New BSD License (3-clause)](LICENSE) © 2023 Digital Bazaar
+[New BSD License (3-clause)](LICENSE) © 2026 Digital Bazaar
