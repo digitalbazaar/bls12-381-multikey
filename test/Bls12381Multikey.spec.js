@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2023-2026 Digital Bazaar, Inc.
  */
 import * as base58 from 'base58-universal';
 import * as Bls12381Multikey from '../lib/index.js';
@@ -222,7 +222,7 @@ describe('Bls12381Multikey', () => {
             // algorithm is always SHA-256 here
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
-            // eslint-disable-next-line max-len
+            // eslint-disable-next-line @stylistic/max-len
             x: 'rMvXj_LibMeRrNh2sqmkBqBH4xKeOWmAYK8inVMX1839y6XeolnbT6vxnxU2PmV9FXJ-rtcz6Txe7v2ij1dFzMHuBT1TyBrtEZWtCSOMTIBXpnVsOMMSdhsTB1iUS9o1'
           };
           expect(jwk).to.eql(expected);
@@ -239,7 +239,7 @@ describe('Bls12381Multikey', () => {
             // algorithm is always SHA-256 here
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
-            // eslint-disable-next-line max-len
+            // eslint-disable-next-line @stylistic/max-len
             x: 'gjs8lstTgoTgXMF6QXdyh3m8k2ixxURGYLMaYylVK_x0F8HhE8zk0YWiGV3CHwpQEa2sH4PBZLaYCn8se-1clmCORDsKxbbw3Js_Alu4OmkV9gmbJsy1YF2rt7Vxzs6S'
           };
           expect(jwk).to.eql(expected);
@@ -323,7 +323,7 @@ describe('Bls12381Multikey', () => {
             // algorithm is always SHA-256 here
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
-            // eslint-disable-next-line max-len
+            // eslint-disable-next-line @stylistic/max-len
             x: 'rMvXj_LibMeRrNh2sqmkBqBH4xKeOWmAYK8inVMX1839y6XeolnbT6vxnxU2PmV9FXJ-rtcz6Txe7v2ij1dFzMHuBT1TyBrtEZWtCSOMTIBXpnVsOMMSdhsTB1iUS9o1',
             d: 'GKvIQj_W51lezMe_U8-k0xd-vedyZK3gHDzONXkXf9I'
           };
@@ -340,7 +340,7 @@ describe('Bls12381Multikey', () => {
             // algorithm is always SHA-256 here
             alg: ALGORITHMS.BBS_BLS12381_SHA256,
             crv: 'Bls12381G2',
-            // eslint-disable-next-line max-len
+            // eslint-disable-next-line @stylistic/max-len
             x: 'gjs8lstTgoTgXMF6QXdyh3m8k2ixxURGYLMaYylVK_x0F8HhE8zk0YWiGV3CHwpQEa2sH4PBZLaYCn8se-1clmCORDsKxbbw3Js_Alu4OmkV9gmbJsy1YF2rt7Vxzs6S',
             d: 'Q4XJCL-sIV3v9lDpWblvIhrkicH5JBnMyMFTGX-HHoU'
           };

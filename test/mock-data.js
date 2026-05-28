@@ -1,12 +1,12 @@
 /*!
- * Copyright (c) 2023-2024 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2023-2026 Digital Bazaar, Inc.
  */
 // note: this multikey has the same key material as `jpaJwk` below
 export const mockMultikey = {
   '@context': 'https://w3id.org/security/multikey/v1',
   type: 'Multikey',
   controller: 'did:example:1234',
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   publicKeyMultibase: 'zUC7GMwWWkA5UMTx7Gg6sabmpchWgq8p1xGhUXwBiDytY8BgD6eq5AmxNgjwDbAz8Rq6VFBLdNjvXR4ydEdwDEN9L4vGFfLkxs8UsU3wQj9HQGjQb7LHWdRNJv3J1kGoA3BvnBv',
   secretKeyMultibase: 'z488vexJQSQ2rF5GrCT8qhzGR7ASSj5rx6CtZjKNFq183woF'
 };
