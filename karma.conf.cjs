@@ -29,8 +29,8 @@ module.exports = function(config) {
       mode: 'development',
       devtool: 'inline-source-map',
       experiments: {
-        topLevelAwait: true,
-      },
+        topLevelAwait: true
+      }
     },
 
     // test results reporter to use
